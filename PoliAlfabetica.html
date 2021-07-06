@@ -76,12 +76,12 @@
                         <div class="contenedor">
                             <form action="" method="POST">
                                 <p class="rotacionp">Introduzca la clave</p>
-                                <input type="number" class="form-control rotacioni" placeholder="rotacion" name="clave">
+                                <input type="text" class="form-control rotacioni" placeholder="Llave" id="rotacion" name="clave">
                                 <br>
                                 <p class="mensajep">Introduzca el mensaje a cifrar</p>
-                                <textarea name="mensaje" placeholder="mensaje" class="form-control mensajei" id="" cols="30" rows="10"></textarea>
+                                <textarea name="mensaje" placeholder="mensaje" class="form-control mensajei" id="mensaje" cols="30" rows="10"></textarea>
                                 <br>
-                                <button type="submit" class="encriptar">Encriptar</button>
+                                <button type="button" class="encriptar" onclick="encriptar()">Encriptar</button>
                                 <br>
                                 <p class="mensajep">Mensaje encriptado</p>
                                 <textarea name="resultado" id="resultado" class="form-control resultado" cols="30" rows="10"></textarea><br>
@@ -104,10 +104,39 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+        <script>
+          const respuesta = document.getElementById('resultado');
+          const text = document.getElementById('mensaje');
+          const rotacion = document.getElementById('rotacion');
+
+          function encriptar(){
+            
+            const ruta ="textoClaro="+text.value+"&rotacion="+rotacion.value;
+
+            $.ajax({
+              type: "POST",
+              url: 'controllers/poli-alfabetica.php',
+              data: ruta,
+            })
+            .done(function(resp) {
+              respuesta.value = resp;
+              console.log(resp);
+            })
+            .fail(function(err) {
+              console.error(err);
+            })
+            .always(function() {})
+          }
+
+          
+        </script>
     </body>
 </html>

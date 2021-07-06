@@ -22,7 +22,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="navPrincipal">
             <div class="container px-4 px-lg-5">
-              <a class="navbar-brand" href="/index.html">Criptografía</a>
+              <a class="navbar-brand" href="./index.html">Criptografía</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -33,8 +33,8 @@
                         Cifra de Desplazamiento
                     </a>
                     <ul class="dropdown-menu fondo" aria-labelledby="navbarDropdownMenuLink">
-                      <li class="fondo"><a class="dropdown-item letraFondo" href="/Puro.html">Puro</a></li>
-                      <li class="fondo"><a class="dropdown-item letraFondo" href="/PuroConPalabraClave.html">Puro con Palabra Clave</a></li>
+                      <li class="fondo"><a class="dropdown-item letraFondo" href="./Puro.html">Puro</a></li>
+                      <li class="fondo"><a class="dropdown-item letraFondo" href="./PuroConPalabraClave.html">Puro con Palabra Clave</a></li>
                     </ul>
                   </li>
                   <li class="nav-item dropdown">
@@ -42,11 +42,11 @@
                         Cifra por Transposición por
                     </a>
                     <ul class="dropdown-menu fondo" aria-labelledby="navbarDropdownMenuLink">
-                      <li class="fondo"><a class="dropdown-item letraFondo" href="/Grupos.html">Grupos</a></li>
-                      <li class="fondo"><a class="dropdown-item letraFondo" href="/Series.html">Series</a></li>
-                      <li class="fondo"><a class="dropdown-item letraFondo" href="/Columnas.html">Columnas</a></li>
-                      <li class="fondo"><a class="dropdown-item letraFondo" href="/Filas.html">Filas</a></li>
-                      <li class="fondo"><a class="dropdown-item letraFondo" href="/Zig-zag.html">Zig-Zag</a></li>
+                      <li class="fondo"><a class="dropdown-item letraFondo" href="./Grupos.html">Grupos</a></li>
+                      <li class="fondo"><a class="dropdown-item letraFondo" href="./Series.html">Series</a></li>
+                      <li class="fondo"><a class="dropdown-item letraFondo" href="./Columnas.html">Columnas</a></li>
+                      <li class="fondo"><a class="dropdown-item letraFondo" href="./Filas.html">Filas</a></li>
+                      <li class="fondo"><a class="dropdown-item letraFondo" href="./Zig-zag.html">Zig-Zag</a></li>
 
                     </ul>
                   </li>
@@ -55,8 +55,8 @@
                         Cifra por Sustitución
                     </a>
                     <ul class="dropdown-menu fondo" aria-labelledby="navbarDropdownMenuLink">
-                      <li class="fondo"><a class="dropdown-item letraFondo" href="/MonoAlfabetica.html">Mono alfabética</a></li>
-                      <li class="fondo"><a class="dropdown-item letraFondo" href="/PoliAlfabetica.html">Poli alfabética</a></li>
+                      <li class="fondo"><a class="dropdown-item letraFondo" href="./MonoAlfabetica.html">Mono alfabética</a></li>
+                      <li class="fondo"><a class="dropdown-item letraFondo" href="./PoliAlfabetica.html">Poli alfabética</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -74,17 +74,36 @@
                     </div>
                     <div class="col-lg-8 align-self-baseline">
                         <div class="contenedor">
-                            <form action="" method="POST">
+                            <form>
                                 <p class="rotacionp">Introduzca la rotación</p>
-                                <input type="number" class="form-control rotacioni" placeholder="rotacion" name="rotacion">
+                                <input 
+                                  type="number" 
+                                  class="form-control rotacioni" 
+                                  placeholder="rotacion" 
+                                  name="desplazamiento"
+                                  id="desplazamiento"
+                                >
                                 <br>
                                 <p class="mensajep">Introduzca el mensaje a cifrar</p>
-                                <textarea name="mensaje" placeholder="mensaje" class="form-control mensajei" id="" cols="30" rows="10"></textarea>
+                                <textarea 
+                                  name="textoClaro" 
+                                  placeholder="mensaje" 
+                                  class="form-control mensajei" 
+                                  id="textoClaro" 
+                                  cols="30" 
+                                  rows="10"
+                                ></textarea>
                                 <br>
-                                <button type="submit" class="encriptar">Encriptar</button>
+                                <button type="button" class="encriptar" onclick="encriptar()">Encriptar</button>
                                 <br>
                                 <p class="mensajep">Mensaje encriptado</p>
-                                <textarea name="resultado" id="resultado" class="form-control resultado" cols="30" rows="10"></textarea><br>
+                                <textarea 
+                                  name="resultado" 
+                                  id="resultado" 
+                                  class="form-control resultado" 
+                                  cols="30" 
+                                  rows="10"
+                                ></textarea><br>
                             </form>
                         </div>
                         <!-- <a class="btn btn-primary btn-xl" href="#about">Find Out More</a> -->
@@ -104,10 +123,40 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        
+        <script>
+          const respuesta = document.getElementById('resultado');
+          const text = document.getElementById('textoClaro');
+          const desplazamiento = document.getElementById('desplazamiento');
+
+          function encriptar(){
+            
+            const ruta ="textoClaro="+text.value+"&desplazamiento="+desplazamiento.value;
+
+            $.ajax({
+              type: "POST",
+              url: 'controllers/puro.php',
+              data: ruta,
+            })
+            .done(function(resp) {
+              respuesta.value = resp;
+              console.log(resp);
+            })
+            .fail(function(err) {
+              console.error(err);
+            })
+            .always(function() {})
+          }
+
+          
+        </script>
+
     </body>
 </html>

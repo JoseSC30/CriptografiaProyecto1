@@ -6,7 +6,7 @@
   $n = strtoupper($n);
   $n = str_replace(' ','', $n);
 
-  echo cifrado_transposcion_por_filas($n, 1, $clave);
+  echo cifrado_transposcion_por_filas($n, $clave, 'X');
   
   function cifrado_transposcion_por_filas($texto_en_claro, $cantidad_de_columnas, $caracter_para_rellenar){
     $texto_en_claro = formatear_texto($texto_en_claro, $cantidad_de_columnas, $caracter_para_rellenar);
@@ -46,6 +46,14 @@ function quitar_espacios_en_blanco($texto){
   }
 
   return $nuevo_texto;
+}
+
+function rellenar_texto($texto, $cantidad_a_rellenar, $caracter_para_rellenar){
+  $caracter_para_rellenar = strtoupper($caracter_para_rellenar);
+  for($i = 0 ; $i < $cantidad_a_rellenar; $i++){
+      $texto = $texto . $caracter_para_rellenar;
+  }
+  return $texto;
 }
 
 

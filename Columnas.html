@@ -77,9 +77,9 @@
                             <form>
                                 <p class="rotacionp">Introduzca la clave</p>
                                 <input 
-                                  type="text" 
+                                  type="number" 
                                   class="form-control rotacioni" 
-                                  placeholder="clave" 
+                                  placeholder="columna" 
                                   name="clave"
                                   id="clave"
                                 >
@@ -142,7 +142,7 @@
 
             $.ajax({
               type: "POST",
-              url: 'controllers/transposicionGrupo.php',
+              url: 'controllers/columna.php',
               data: ruta,
             })
             .done(function(resp) {

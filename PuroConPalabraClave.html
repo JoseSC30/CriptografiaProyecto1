@@ -84,6 +84,15 @@
                                   id="clave"
                                 >
                                 <br>
+                                <p class="rotacionp">Introduzca la posicion</p>
+                                <input 
+                                  type="number"
+                                  class="form-control rotacioni" 
+                                  placeholder="posicion" 
+                                  name="posicion"
+                                  id="posicion"
+                                >
+                                <br>
                                 <p class="mensajep">Introduzca el mensaje a cifrar</p>
                                 <textarea 
                                   name="mensaje" 
@@ -136,10 +145,11 @@
           const respuesta = document.getElementById('resultado');
           const text = document.getElementById('mensaje');
           const clave = document.getElementById('clave');
+          const posicion = document.getElementById('posicion');
 
           function encriptar(){
             
-            const ruta ="textoClaro="+text.value+"&clave="+clave.value;
+            const ruta ="textoClaro="+text.value+"&clave="+clave.value+"&posicion="+posicion.value;
 
             $.ajax({
               type: "POST",

@@ -2,11 +2,14 @@
 
   $n = $_POST['textoClaro'];
   $clave = $_POST['clave'];
+  $posicion = $_POST['posicion'];
+
+  $num = intval($posicion);
 
   // $n = strtoupper($n);
   // $n = str_replace(' ','', $n);
 
-  echo puroConClave($clave, 1, $n);
+  echo puroConClave($clave, $num, $n);
   
   function puroConClave($clv, $des, $msj){
     $alfabeto = ['A', 'B', 'C', 'D', 'E', 'F ', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];

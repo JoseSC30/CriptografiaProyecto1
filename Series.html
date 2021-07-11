@@ -85,6 +85,11 @@
                               rows="10"
                             ></textarea>
                             <br>
+
+                            <div class="error" id="error">
+                              Error, rellene todos los espacios en blanco
+                            </div>
+
                             <button type="button" class="encriptar" onclick="encriptar()">Encriptar</button>
                             <br>
                             <p class="mensajep">Mensaje encriptado:</p>
@@ -125,9 +130,17 @@
         <script>
           const respuesta = document.getElementById('resultado');
           const text = document.getElementById('mensaje');
+          const error = document.getElementById('error');
 
           function encriptar(){
             
+            if ((text.value.length==0)){
+              error.style.display = "block";
+              return;
+            }else{
+              error.style.display = "none";
+            }
+
             const ruta ="textoClaro="+text.value;
 
             $.ajax({

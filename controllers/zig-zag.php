@@ -9,11 +9,15 @@
   echo cifrado_zig_zag($c, $n);
   
   function cifrado_zig_zag($constante, $mensaje){
-
+    
     $mensaje = strtoupper($mensaje);
     $mensaje = str_replace(' ','', $mensaje);
     $cantidad = strlen($mensaje);
-  
+    
+    if ($constante==1){
+      return $mensaje;
+    }
+
     $data = array();
   
     for($i=0;$i<$constante;$i++){
@@ -25,7 +29,7 @@
   
     for($i=0;$i<$cantidad;$i++){
       array_push($data[$iterable], $mensaje[$i]);
-      if ($iterable==2){
+      if ($iterable==$constante-1){
         $status = False;
       }else if($iterable==0){
         $status = True;

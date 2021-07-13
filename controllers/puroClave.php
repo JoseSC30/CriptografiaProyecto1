@@ -1,74 +1,68 @@
 <?php
 
-  $n = $_POST['textoClaro'];
-  $clave = $_POST['clave'];
-  $posicion = $_POST['posicion'];
+$texto = $_POST['textoClaro'];
+$clave = $_POST['clave'];
+$posicion = $_POST['posicion'];
 
-  $num = intval($posicion);
+$desplazamiento = intval($posicion);
 
-  // $n = strtoupper($n);
-  // $n = str_replace(' ','', $n);
+echo puroConClave($texto,$clave,$desplazamiento);
 
-  echo puroConClave($clave, $num, $n);
-  
-  function puroConClave($clv, $des, $msj){
-    $alfabeto = ['A', 'B', 'C', 'D', 'E', 'F ', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    $clave = strtoupper($clv);
-    $clave = str_replace(' ', '', $clave);
-    $desplazamiento = $des;
-    $mensaje = strtoupper($msj);
-
-    $newalfabeto = [];
-    $late = [];
-    $c = 0;
-    $k = 0;
-    for ($i=0; $i < count($alfabeto); $i++) {
-        if ($k < $desplazamiento) {
-            $newalfabeto[$i] = 1;
-            $k++;
-        } else {
-            $letra = substr($clave, $c, 1);
-            if (!in_array($letra, $late)) {
-                $newalfabeto[$k] = $letra;
-                array_push($late, $letra);
-                $k++;
+function cifra_puro($texto,$clave,$desplazamiento){
+    $abc = array("A","B","C","D","E","F","G","H","I","J","K","L","M","N","Ñ","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+        $texto = strtoupper($texto);
+        $clave = strtoupper($clave);
+        
+        $n_abc[0] = $clave[0];
+        $num = 1;
+        //Ingresa la palabra a n_abc
+        for($j =0; $j < strlen($clave);$j++){
+            if($clave[$j] != " "){
+                $bool = false;
+                for($k = 0; $k < $num;$k++){
+                    if ($n_abc[$k]==$clave[$j]){
+                        $bool = true;
+                    }
+                }
+                if($bool == false){
+                 $n_abc[$num]=$clave[$j];
+                    $num = $num + 1;
+                }
             }
-            $c++;
         }
-
-        if ($k > $desplazamiento + strlen($clave)) {
-            $newalfabeto[$i] = 1;
-            $k++;
+        //Ingresa letras restantes a n_abc
+        for($j =0; $j < 27;$j++){
+            $bool = false;
+            for($k = 0; $k < $num;$k++){
+                if ($n_abc[$k] == $abc[$j]){
+                    $bool = true;
+                }
+            }
+            if($bool == false){
+                $n_abc[$num]=$abc[$j];
+                $num = $num + 1;
+            }
         }
-    }
+        //Cifrado del texto
+        for($i = 0; $i < strlen($texto) ;$i++){
+          if($texto[$i] != " "){
+             $esta = false;
+                for($e = 0; $esta == false ; $e++){
+                    if($texto[$i] == $abc[$e]){
+                      $e = $e - $desplazamiento;
 
-    $c = $desplazamiento + strlen($clave) - 2;
-    for ($i=0; $i < count($alfabeto); $i++) { 
-        if (!in_array($alfabeto[$i], $late) && $c < count($alfabeto)) {
-            $newalfabeto[$c] = $alfabeto[$i];
-            $c++;
+                        if($e > 26){
+                            $e = $e - 27;
+                        }else{
+                            if($e < 0){
+                          $e = $e + 27;
+                            } 
+                        }
+                        $esta = true;
+                        $texto[$i] = $n_abc[$e];
+                    }
+                }
+            }    
         }
-    }
-
-    $c = 0;
-    for ($j=0; $j < count($alfabeto); $j++) { 
-        if (!in_array($alfabeto[$j], $late) && $c < $desplazamiento) {
-            $newalfabeto[$c] = $alfabeto[$j];
-            $c++;
-        }
-    }
-
-    $resultado = "";
-    for ($i=0; $i < strlen($mensaje); $i++) { 
-        $letra = substr($mensaje, $i, 1);
-        if ($letra == " ") {
-            $resultado = $resultado . " ";
-        }
-        $clave = array_search($letra, $alfabeto);
-        $resultado = $resultado . $newalfabeto[$clave];
-    }
-
-    return $resultado;
-  }
-
-?>
+    return $texto;
+}

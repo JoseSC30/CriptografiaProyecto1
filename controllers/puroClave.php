@@ -66,3 +66,4 @@ function cifra_puro($texto,$clave,$desplazamiento){
         }
     return $texto;
 }
+?>
